@@ -1,0 +1,6 @@
+
+# Console de geracao de arquivos
+*/5 * * * * root php -q /git/genrest/GenRest/consoles/console_mysql.php
+
+# Console de envia email de recuperacao
+*/10 * * * * root php -q /git/genrest/GenRest/consoles/console_envia_email_recuperacao.php
