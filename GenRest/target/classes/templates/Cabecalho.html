@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<link rel="stylesheet" href="/css/cabecalho.css">
+
+<div class="sidebar">
+	<div class="logo-details">
+		<i class='bx bxl-google icon' ></i>
+		<div class="logo_name">GenRest</div>
+		<i class='bx bx-menu' id="btn" ></i>
+	</div>
+	<ul class="nav-list">
+		<li>
+			<a href="/dashboard">
+				<i class='bx bx-line-chart'></i>
+				<span class="links_name">Dashboard</span>
+			</a>
+			<span class="tooltip">Dashboard</span>
+		</li>
+	    <li class="tela_api">
+			<a href="/api">
+				<i class='bx bx-cloud'></i>
+				<span class="links_name">API</span>
+			</a>
+			<span class="tooltip">API</span>
+	    </li>
+		<li>
+			<a href="/conta">
+				<i class='bx bx-user'></i>
+				<span class="links_name">Minha Conta</span>
+			</a>
+			<span class="tooltip">Minha Conta</span>
+		</li>
+	    <li>
+			<a href="/tokens">
+				<i class='bx bx-spreadsheet'></i>
+				<span class="links_name">Tokens</span>
+			</a>
+			<span class="tooltip">Tokens</span>
+	    </li>
+	    <li>
+			<a href="/logs">
+				  <i class='bx bx-archive'></i>
+				  <span class="links_name">Logs</span>
+			</a>
+			<span class="tooltip">Logs</span>
+	    </li>
+		<li>
+			<a href="/logout">
+				<i class='bx bx-log-out'></i>
+				<span class="links_name">Sair</span>
+			</a>
+			<span class="tooltip">Sair</span>
+		</li>
+	</ul>
+</div>
+
+<script src="/js/cabecalho.js"></script>
+</html>

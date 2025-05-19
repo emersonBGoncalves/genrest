@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{LayoutPadrao}">
+<head>
+    <title>GenRest - Dashboard</title>
+    <script src="js/highcharts.js" type="text/javascript"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+            var json_uso_dia                 = /*[[${listaUsoHora}]]*/ 'default';
+            var json_uso_mes                 = /*[[${listaUsoMes}]]*/ 'default';
+            var json_usuario_dia             = /*[[${listaUsoUsuariosDia}]]*/ 'default';
+            var json_usuario_mes = /*[[${listaUsoUsuariosMes}]]*/ 'default';
+        /*]]>*/
+    </script>
+
+	<script src="js/graficos.js?v=<?=md5_file('js/graficos.js')?>"> </script>
+	<script src="js/tutorialDashboard.js?v=<?=md5_file('js/tutorialDashboard.js')?>"> </script>
+</head>
+<section layout:fragment="conteudo">
+    <h5>DashBoard <i class='bx bx-help-circle' id="help"></i></h5>
+    <div class="box-1-4-1 tutorial">
+        Quantidade de funções<br><span class="dash_right" th:text="${qtdFuncoes}">0</span>
+    </div>
+    <div class="box-1-4-2 tutorial">
+        Plano atual<br><span class="dash_right" th:text="${planoAtual}">Pagamento Mensal</span>
+    </div>
+    <div class="box-1-4-2 tutorial">
+        Requisições no plano<br><span th:text="${QtdRequisicoes}" class="dash_right">0</span>
+    </div>
+    <div class="box-1-4-2 tutorial">
+        Fatura do plano<br><span class="dash_right" th:text="${ValorQtdRequisicoes}">R$ 0,00</span>
+    </div>
+    <div class="box-1-2-1 tutorial">
+        <div id="chart_uso_dia"></div>
+    </div>
+    <div class="box-1-2-2 tutorial">
+        <div id="chart_uso_mes"></div>
+    </div>
+    <div class="box-1-2-1 tutorial">
+        <div id="uso_usuario_dia"></div>
+    </div>
+    <div class="box-1-2-2 tutorial">
+        <div id="uso_usuario_mes"></div>
+    </div>
+	<div style="padding: 50px;"></div>
+
+	<div class="box_tutorial">
+		<span id="msg_tutorial"></span>
+		<buttom class="btn btn-primary" id="proximo" style="float: right;margin-top: -7px;margin-left: 10px;">Próximo</buttom>
+	</div>
+
+</section>
+</html>

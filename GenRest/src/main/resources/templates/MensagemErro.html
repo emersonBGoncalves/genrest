@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div class="alert alert-danger" th:if="${!#strings.isEmpty(listaErros)}">
+	<span class="alert_timer" style="float: left">29</span><span style="font-weight: 700;  font-size: 20px;">Olá</span><span class="remover_alert">x</span><br>
+	<div th:each="erro : ${listaErros}">
+		<span th:text="${erro}"></span>
+	</div>
+</div>
+
+</html>

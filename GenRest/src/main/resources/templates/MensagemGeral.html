@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div id="msgGeralClass" th:class="${classe}" th:if="${!#strings.isEmpty(mensagem)}">
+	<span class="alert_timer" style="float: left">29</span><span style="font-weight: 700;  font-size: 20px;">Olá</span><span class="remover_alert">x</span><br>
+	<span id="msgGeral" th:text="${mensagem}"></span><br>
+	<b th:if="${!#strings.isEmpty(hash)}"><span id="hash" th:text="${hash}"></span><br></b>
+	<small th:if="${!#strings.isEmpty(hash)}">* Este Token não poderá ser visto novamente ao fechar!</small>
+</div>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{LayoutPadrao}">
+<head>
+<title th:text="${status}">NOT FOUND!</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="album py-5 alert-erro2">
+		<div class="container">
+			<div class="text-center">
+				<h1 class="h3 mb-3 font-weight-normal">
+					<i class="oi oi-warning"></i>
+					<span th:text="${status}">404</span> =(</br>
+					<span th:text="${mensagem}">Mensagem</span>
+				</h1>
+			</div>
+		</div>
+	</div>
+</section>
+</html>

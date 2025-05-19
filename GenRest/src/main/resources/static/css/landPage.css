@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+html,
+body {
+  	height: 100%;
+  	width: 100%;
+	font-family: "Poppins" , sans-serif !important;
+	margin: 0;
+	background-color: #d4d4de;
+}
+
+.header
+{
+	height: 900px;
+	color: #fff;
+	background-image: url(../images/full_banner.png);
+	background-position: bottom;
+	padding: 50px 80px 50px 80px
+}
+
+.logo
+{
+	height: 100px;
+}
+
+.logo img
+{
+	height: 100%;
+}
+
+.menu
+{
+	align-self: center;
+	cursor: default;
+}
+
+.menu a
+{
+	margin: 0px 20px 0px 20px;
+	color: #b3b3b3;
+	border: 0;
+	transition: all 0.5s ease;
+}
+
+.menu a:hover
+{
+	color: #fff;
+	border-bottom:2px solid #fff;
+    padding-bottom:5px;
+	text-decoration: none;
+}
+
+.login
+{
+	align-self: center;
+}
+
+.login .btn-login
+{
+	background-color: transparent;
+    border: 1px solid #fff;
+	transition: all 0.5s ease;
+	text-decoration: none;
+}
+
+.btn-login:focus, .btn-login:hover, .btn-login:active
+{
+	background-color: #fff;
+    border: 1px solid #181E26;
+    color: #181E26;
+}
+
+.login .btn-login i
+{
+	vertical-align: middle;
+}
+
+.first
+{
+	align-items: center;
+	text-align: left;
+}
+
+.first_quadrado
+{
+	height: 500px;
+    background-color: #fff;
+    margin: 50px 70px 0px 0px;
+    border-radius: 30px;
+}
+
+h4
+{
+	color: #b3b3b3;
+    font-size: 1rem;
+}
+
+#circulo_venha
+{
+	background-color: #0984E3;
+    border-radius: 50%;
+	padding: 7px 10px 7px 7px;
+	transition: all 0.5s ease;
+}
+
+#resto_venha
+{
+	margin-left: -10px;
+}
+
+h3
+{
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+
+.first a
+{
+	text-decoration: none;
+	color: #fff;
+}
+
+.quem_somos
+{
+	width: 100%;
+}
+
+.quem_somos .quadrado
+{
+    background-color: #fff;
+    margin: 50px 0px 0px 0px;
+    border-radius: 30px;
+	padding: 50px;
+    text-align: left;
+}
+
+.quem_somos .quadrado h0
+{
+	font-weight: 700;
+	font-size: 3.5rem;
+}
+
+.texto_quem_somos
+{
+	width: 60%;
+    margin-top: 40px;
+    padding-left: 35px;
+    border-left: 3.5px solid #0984E3;
+    color: #666666;
+    font-size: 17px;
+    margin-left: 17px;
+}
+
+.quadrado_imagem_quem_somos
+{
+    background-color: #181E26;
+	margin: 50px 0px 0px 0px;
+    border-radius: 30px;
+	padding: 50px;
+    text-align: left;
+	height: 70%;
+	align-self: center;
+	margin-left: -150px;
+}
+
+.seta_esquerda i
+{
+	font-size: 50px;
+    float: left;
+    margin-left: -65px;
+	color: #666666;
+	margin-top: 20%;
+	cursor: pointer;
+}
+
+.seta_direita i
+{
+	font-size: 50px;
+    float: right;
+    margin-right: -65px;
+	color: #666666;
+	margin-top: 20%;
+	cursor: pointer;
+}
+
+.seta_direita i:hover, .seta_esquerda i:hover
+{
+	color: #0984E3;
+}

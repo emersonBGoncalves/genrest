@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>GenRest - Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	</link>
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	</link>
+	<link rel="stylesheet" type="text/css" href="/css/dataTables.bootstrap4.min.css">
+	</link>
+
+	<!-- JS -->
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	<script src="/js/jquery.mask.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.dataTables.min.js"></script>
+	<script src="/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?trustedtypes=true"></script>
+	<script>
+		$(function () {
+			$("#txtCpfCnpj").keydown(function () {
+				try {
+					$("#txtCpfCnpj").unmask();
+				} catch (e) { }
+
+				var tamanho = $("#txtCpfCnpj").val().length;
+
+				if (tamanho < 11) {
+					$("#txtCpfCnpj").mask("999.999.999-99");
+				} else {
+					$("#txtCpfCnpj").mask("99.999.999/9999-99");
+				}
+
+				// ajustando foco
+				var elem = this;
+				setTimeout(function () {
+					// mudo a posição do seletor
+					elem.selectionStart = elem.selectionEnd = 10000;
+				}, 0);
+				// reaplico o valor para mudar o foco
+				var currentValue = $(this).val();
+				$(this).val('');
+				$(this).val(currentValue);
+			});
+		});
+	</script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+			var usuarioExiste = /*[[${usuarioExiste}]]*/ 'default';
+			if(usuarioExiste){
+				$(function () {
+					$('#btnCadastrar').click();
+				});
+			}
+		/*]]>*/
+	</script>
+	<script>
+		function onSubmit(token) {
+			if($("#username").val() == "")
+			{
+				$("#username").removeClass('is-valid').addClass('is-invalid');
+				$("#username").focus();
+				return false;
+			}
+			else
+				$("#username").removeClass('is-invalid');
+
+			if($("#password").val() == "")
+			{
+				$("#password").removeClass('is-valid').addClass('is-invalid');
+				$("#password").focus();
+				return false;
+			}
+			else
+				$("#password").removeClass('is-invalid');
+
+			document.getElementById("form-signin").submit();
+		}
+	</script>
+</head>
+
+<body>
+	<link href="/css/signin.css" rel="stylesheet">
+	</head>
+
+	<body class="text-center">
+		<section class="login_esquerda"></section>
+		<section class="login_direita">
+			<form class="form-signin" id="form-signin" method="POST" th:action="@{/login}">
+				<fieldset>
+					<div th:if="${email_confirmado}" class="alert alert-success">
+						Email confirmado com sucesso =D
+					</div>
+					<div th:if="${message}" class="alert alert-danger">
+						<alert th:text="${message}">message vem de LoginController "/login-error"</alert><br>
+						<alert th:text="${submessage}">submessage vem de LoginController "/login-error"</alert>
+					</div>
+					<div th:if="${param.naoAutenticado}" class="alert alert-danger">
+						Usuario não confirmado, favor confirme o seu Email.
+					</div>
+					<div th:if="${param.logout}" class="alert alert-success">
+						Você foi desconectado.
+					</div>
+					<div th:if="${cadastrado}" class="alert alert-success">
+						Usuario cadastrado com sucesso =D
+					</div>
+					<div th:if="${recuperacao_enviado}" class="alert alert-success">
+						E-mail de recuperação de senha enviado com sucesso =D
+					</div>
+					<div th:if="${token_invalido}" class="alert alert-danger">
+						Token não fornecido ou inválido!
+					</div>
+					<div th:if="${senha_alterada}" class="alert alert-success">
+						Senha alterada com sucesso =D
+					</div>
+					<div class="alert alert-warning" th:if="${!#strings.isEmpty(mensagem)}">
+						<span th:text="${mensagem}">Mensagem vem do Controller</span>
+					</div>
+					<img class="mb-4" src="/images/padrao.png" alt="" width="100" height="100">
+
+					<label for="inputEmail" class="sr-only">E-mail</label>
+					<input type="text" id="username" style="margin-bottom: 10px;" class="form-control" placeholder="E-mail" required autofocus name="usuario" th:value="${usuario?.getEmail()}" />
+
+					<label for="inputPassword" class="sr-only">Senha</label>
+					<input type="password" id="password" class="form-control" placeholder="Senha" style="margin-bottom: 0;" required name="senha" />
+					<div class="checkbox mb-3 links">
+						<a href="/RecupSenha.html" style="float: left;" title="Cadastrar-se" data-toggle="modal" data-target="#senhaModal"><small>Esqueceu a Senha?</small></a>
+						<a id="btnCadastrar" title="Cadastrar-se" href="" data-toggle="modal" style="float: right;"
+							data-target="#cadastroModal"><small>Cadastrar-se</small></a>
+					</div><br>
+					<button class="btn btn-lg btn-primary btn-block g-recaptcha" data-sitekey="6LeKjw8cAAAAADNcZuQmIJP1u7eH8dWwT308t8gC" data-callback='onSubmit' data-action='submit'>Entrar</button>
+					<small class="mt-5 mb-3 text-muted">&copy; 2021 GenRest. All Rights Reserved.</small>
+				</fieldset>
+			</form>
+		</section>
+	</body>
+	<section layout:fragment="modais">
+		<!-- Modal Adicionar -->
+		<div class="modal fade" id="cadastroModal" tabindex="-1" role="dialog" aria-labelledby="cadastroModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<form th:action="@{/cadastrar}" method="POST" th:object="${usuario}">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="adicionarTitle">Cadastrar-se</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div th:if="${usuarioExiste}" class="alert alert-danger">
+								<span th:text="${cpfCnpjExiste}"></span></br>
+								<span th:text="${emailExiste}"></span>
+							</div>
+							<div class="form-group">
+								<label for="txtNome">Nome / Razão Social</label>
+								<input class="form-control form-control-sm" id="txtNome" type="text" required autofocus
+									name="username" field="*{username}" th:value="${usuario?.getUsername()}"></input>
+							</div>
+							<div class="form-group">
+								<label for="txtNome">CPF/CNPJ</label>
+								<input class="form-control form-control-sm" id="txtCpfCnpj" type="text" required
+									name="cpfCnpj" field="*{cpfCnpj}" th:value="${usuario?.getCpfCnpj()}"></input>
+							</div>
+							<div class="form-group">
+								<label for="txtNome">E-mail</label>
+								<input class="form-control form-control-sm" id="txtEmail" type="text" required
+									name="email" field="*{email}" th:value="${usuario?.getEmail()}"></input>
+							</div>
+							<div class="form-group">
+								<label for="txtNome">Senha</label>
+								<input class="form-control form-control-sm" id="txtSenha" type="password" required
+									name="senha" field="*{senha}"></input>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button type="submit" class="btn btn-primary">Adicionar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Fim Modal Adicionar -->
+
+		<!-- Modal Senha -->
+		<div class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="senhaModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<form th:action="@{/recuperar-senha}" method="POST" th:object="${usuario}">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="adicionarTitle">Esqueceu a senha?</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<small>Digite seu e-mail para recupar a senha</small>
+							<div class="form-group">
+								<label for="txtNome">E-mail</label>
+								<input class="form-control form-control-sm" id="txtEmailRecup" type="text" required
+									name="email" field="*{email}"></input>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Fim Modal Senha -->
+	</section>
+
+</html>

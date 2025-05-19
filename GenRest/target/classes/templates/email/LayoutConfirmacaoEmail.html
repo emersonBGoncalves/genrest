@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	</head>
+	<body>
+		<div style="width:1000px;">
+			
+			<div style="width:675px; border: 2px solid #EAEAEA; margin-left: 156px; margin-top: 18px; background-color: #fff;">
+				<div style="padding: 20px;text-align: -webkit-center;">
+				</div>
+				<div style="text-align: center; background-color: #EAEAEA; padding: 20px;">
+					<span style="color: #008CC1;font-weight: bold;font-size: 23px;">Confirmação de E-mail</span><br>
+				</div>
+			</div>
+			<div style="width:589px; border-right: 15px solid #EAEAEA; border-left: 15px solid #EAEAEA; border-bottom: 15px solid #EAEAEA; margin-left: 156px; padding: 30px; background-color: #fff;margin-top: -20px;">
+				Link de confirmação: <a th:href="|http://18.231.112.186:8081/confirmacao?token=${token}|">Clique aqui para confirmar</a>
+			</div>
+			<div style="width:589px; border-right: 15px solid #EAEAEA; border-left: 15px solid #EAEAEA; border-bottom: 15px solid #EAEAEA; margin-left: 156px; padding: 30px; background-color: #fff;margin-top: -20px;padding-left: 35px; padding-right: 35px; padding-bottom: 15px; padding-top: 15px; font-size: 11px; font-family: helvetica, arial, sans-serif; color:#9b9b9b; line-height: 170%;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="border-top: 1px solid #d8d8d5; padding-left: 35px; padding-right: 35px; padding-bottom: 15px; padding-top: 15px; font-size: 11px; font-family: helvetica, arial, sans-serif; color:#9b9b9b; line-height: 170%;" align="center" >
+							GenRest © 2021. Todos os direitos reservados.
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

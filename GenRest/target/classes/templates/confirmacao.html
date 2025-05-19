@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>GenRest - Confirmação</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="text-center" style="background-color: black">
+	<section class="login_direita">
+			<fieldset>
+				<img class="mb-4" src="cid:logo" alt="" width="100" height="100">
+				<h4 th:text="${titulo}"></h4><br>
+				<p th:text="${texto}"></p><br>
+				<p th:if="${link != null}">
+					<a th:href="${link}">Confirmar</a>
+				</p>
+				<small class="mt-5 mb-3 text-muted">&copy; 2021 GenRest. All Rights Reserved.</small>
+			</fieldset>
+	</section>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{LayoutPadrao}">
+
+<head>
+	<title>GenRest - API</title>
+</head>
+<section layout:fragment="conteudo">
+	<h5>Documentação da API</h5>
+	<div class="box-1-2-1-decorado">
+		Quantidade de funções<br><span class="dash_right" th:text="${qtdFuncoes}">0</span>
+	</div>
+	<div class="box-1-2-2-decorado">
+		URL para requisição<br><span class="dash_right">http://54.233.79.212/index.php</span>
+	</div>
+	<span th:each="dados : ${todosDados}">
+		<span th:utext="${dados.dados}"></span>
+	</span>
+</section>
+
+</html>

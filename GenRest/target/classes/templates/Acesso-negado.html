@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{LayoutPadrao}">
+<head>
+<title>GENREST</title>
+</head>
+<section layout:fragment="conteudo">
+    <div sec:authorize="hasAuthority('cadastrado')">
+        <div class="album py-5 alert-erro">
+            <div class="container">
+                <div class="text-center">
+                    <h1 class="h3 mb-3 font-weight-normal">
+                        <i class="oi oi-warning"></i>
+                        <span>Bem vindo =)</span>
+                    </h1>
+					<h5 class="text-success2">Acesse a sua conta e confira nossos planos!</a></h5>
+                    <div>
+                        <br/>
+                        <a class="btn btn-primary" type="button" href="conta">Minha conta</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('dados_enviados')">
+       <div class="album py-5 alert-erro">
+            <div class="container">
+                <div class="text-center">
+                    <h1 class="h3 mb-3 font-weight-normal">
+                        <i class="oi oi-warning"></i>
+                        <span>Aguarde =)</span>
+                    </h1>
+					<h5 class="text-success2">Sua API ja está sendo gerada, em instantes tudo estará funcionando!</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div sec:authorize="hasAuthority('erro')">
+		<div class="album py-5 alert-erro2">
+			<div class="container">
+				<div class="text-center">
+					<h1 class="h3 mb-3 font-weight-normal">
+						<i class="oi oi-warning"></i>
+						<span>Erro =(</span>
+					</h1>
+					<h5 class="text-danger">Erro ao gerar sua API, favor contate-nos através do nosso Email de contato!</h5>
+					<h5>Email: contato@genrest.com</h5>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div sec:authorize="hasAuthority('pronto')">
+        <script>
+            location.reload();
+        </script>
+    </div>
+</section>
+</html>

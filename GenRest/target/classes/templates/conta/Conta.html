@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{LayoutPadrao}">
+
+<head>
+	<title>GenRest - Minha conta</title>
+	<script>
+		$(function () {
+			$("#editar_dados_db").click(function()
+			{
+				if($(this).attr("data-editou") == 1)
+				{
+					$(".readonly_db").each(function (index, input) {
+						$(input).attr("disabled", true);
+						$(input).val($(input).attr("data-original"), true);
+					});
+
+					$(".disabled_db").each(function (index, input) {
+						$(input).attr("disabled", true);
+						$(input).prop("checked", $(input).attr("data-original"));
+					});
+
+					$(".editar_dados_banco").val(0);
+					$(this).html("Editar Dados");
+					$(this).attr("data-editou", 0);
+					$("#msg_editou_db").hide("slow");
+				}
+				else
+				{
+					$(".readonly_db").attr("disabled", false);
+					$(".disabled_db").attr("disabled", false);
+					$(".editar_dados_banco").val(1);
+					$(this).html("Manter dados originais");
+					$(this).attr("data-editou", 1);
+					$("#msg_editou_db").show("slow");
+				}
+			});
+			$(".btn-enviar").click(function(){
+				$(':disabled').each(function(e) {
+					$(this).attr("disabled", false);
+				});
+
+				$(".checkbox-valor").each(function(e) {
+					if($(this).is(":checked")){
+						$("#" + $(this).attr("data-id")).val(1);
+					}else{
+						$("#" + $(this).attr("data-id")).val(0);
+					}
+				});
+
+			});
+		});
+	</script>
+	<script src="js/tutorialConta.js?v=<?=md5_file('js/tutorialConta.js')?>"> </script>
+</head>
+<section layout:fragment="conteudo">
+	<h5>Minha conta <i class='bx bx-help-circle' id="help"></i></h5>
+	<div th:if="${erro}" class="alert alert-danger">
+		<span class="alert_timer" style="float: left">29</span><span class="remover_alert">x</span>
+		Erro ao editar dados.
+	</div>
+	<div th:if="${sucesso}" class="alert alert-success">
+		<span class="alert_timer" style="float: left">29</span><span class="remover_alert">x</span>
+		Dados editados com sucesso.
+	</div>
+	<form th:action="@{/conta/gravar}" enctype="multipart/form-data" th:object="${usuario}">
+		<div class="box tutorial pai1">
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<h5>Dados Cadastrais</h5>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai1">
+					<label for="txtNome">Nome</label>
+					<input required class="form-control form-control-sm" th:value="${usuario.getUsername()}" field="*{username}" id="txtNome" name="username" type="text"></input>
+				</div>
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai1">
+					<label for="txtCpfCnpj">CPF/CNPJ</label>
+					<input required class="form-control form-control-sm" th:value="${usuario.getCpfCnpj()}" field="*{cpfCnpj}" id="txtCpfCnpj" name="cpfCnpj" type="text"></input>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai1">
+					<label for="txtEmail">Email</label>
+					<input required class="form-control form-control-sm" th:value="${usuario.getEmail()}" field="*{email}" id="txtEmail" name="email" type="email"></input>
+				</div>
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai1">
+					<label for="txtSenha">Senha</label>
+					<input class="form-control form-control-sm" id="txtSenha" placeholder="Em branco para manter"
+						type="password" field="*{senha}" name="senha"></input>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai1">
+					<label for="estadual">Inscrição estadual</label>
+					<input class="form-control form-control-sm" th:value="${usuario.getInscricaoEstadual()}" field="*{inscricaoEstadual}" id="estadual" name="estadual" type="text"></input>
+				</div>
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai1">
+					<label for="txtNome">Telefone</label>
+					<input class="form-control form-control-sm" th:value="${usuario.getTelefone()}" field="*{telefone}" id="telefone" name="telefone" type="text"></input>
+				</div>
+			</div>
+		</div>
+		<div class="box tutorial pai2">
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<h5>Dados do banco<buttom class="btn btn-primary" data-editou="0" id="editar_dados_db" sec:authorize="hasAuthority('pronto')" style="float: right;width: auto;">Editar dados</buttom></h5>
+					<small class="text-danger" style="display: none" id="msg_editou_db">Ao clicar em salvar, as funções serão desabilitadas e recarregadas a partir do novo banco de dados</small>
+				</div>
+			</div>
+			<input type="hidden" name="editar_dados_banco" class="editar_dados_banco" value="0">
+			<div class="form-row">
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai2">
+					<label for="txtNome">Host</label>
+					<input required class="form-control form-control-sm readonly_db" th:attr="data-original=${usuario.getHost()}" th:disabled="${permissao == 3}" th:value="${usuario.getHost()}" field="*{host}" name="host" id="txtHost" type="text"></input>
+				</div>
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai2">
+					<label for="txtDB">Database</label>
+					<input required class="form-control form-control-sm readonly_db" th:attr="data-original=${usuario.getDatabase()}" th:disabled="${permissao == 3}" th:value="${usuario.getDatabase()}" field="*{database}" name="database" id="txtDB" type="text"></input>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai2">
+					<label for="txtUserDB">User</label>
+					<input required class="form-control form-control-sm readonly_db" th:attr="data-original=${usuario.getUserDB()}" th:disabled="${permissao == 3}" th:value="${usuario.getUserDB()}" field="*{userDB}" name="userDB" id="txtUserDB" type="text"></input>
+				</div>
+				<div class="form-group col-md-6 tutorial" data-pai-tutorial="pai2">
+					<label for="txtSenhaDB">Password</label>
+					<input th:attr="required=${permissao == 1 ? 'required' : null}" class="form-control form-control-sm readonly_db" data-original="" th:disabled="${permissao == 3}" field="*{senhaDatabase}" name="senhaDatabase" id="txtSenhaDatabase" placeholder="Em branco para manter"
+						type="password"></input>
+				</div>
+			</div>
+			<div class="form-row tutorial" data-pai-tutorial="pai2">
+				<div class="form-group col-md-12">
+					<label for="txtNome">Funções desejadas</label>
+					<br>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked disabled
+							value="option1">
+						<label class="form-check-label" for="inlineCheckbox1">Listagem</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input disabled_db checkbox-valor" data-id="checkboxInsercao" th:disabled="${permissao == 3}" type="checkbox" th:attr="data-original=${usuario.habilita_insert == 1}" th:checked="${usuario.habilita_insert == 1}">
+						<label class="form-check-label" for="inlineCheckbox2">Inserção</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input disabled_db checkbox-valor" data-id="checkboxEdicao" th:disabled="${permissao == 3}" type="checkbox" th:attr="data-original=${usuario.habilita_update == 1}" th:checked="${usuario.habilita_update == 1}">
+						<label class="form-check-label" for="inlineCheckbox3">Edição</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input disabled_db checkbox-valor" data-id="checkboxExclusao" th:disabled="${permissao == 3}" type="checkbox" th:attr="data-original=${usuario.habilita_delete == 1}" th:checked="${usuario.habilita_delete == 1}">
+						<label class="form-check-label" for="inlineCheckbox4">Remoção</label>
+					</div>
+					<input type="hidden" id="checkboxInsercao" field="*{habilita_insert}" name="habilita_insert"/>
+					<input type="hidden" id="checkboxEdicao" field="*{habilita_update}" name="habilita_update"/>
+					<input type="hidden" id="checkboxExclusao" field="*{habilita_delete}" name="habilita_delete"/>
+				</div>
+			</div>
+		</div>
+		<div class="box tutorial">
+			<div class="form-row">
+				<div class="form-group col-md-12">
+					<h5>Planos</h5>
+				</div>
+			</div>
+			<div class="form-row">
+
+				<div class="col-md-4" th:if="${usuario.getPlano() == 0 || usuario.getPlano() == 1}">
+					<div class="plano plano_verde plano_selecionado" data-valor="1">
+						<div class="titulo_plano">
+							Plano mensal
+						</div>
+						<div class="desc_plano">
+							R$ 0,10 por requisição<br>
+							<small style="font-size: 60%;">* Passivo de multa ao cancelamento antes do primeiro pagamento!</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4" th:unless="${usuario.getPlano() == 0 || usuario.getPlano() == 1}">
+					<div class="plano plano_verde" data-valor="1">
+						<div class="titulo_plano">
+							Plano mensal
+						</div>
+						<div class="desc_plano">
+							R$ 0,10 por requisição<br>
+							<small style="font-size: 60%;">* Passivo de multa ao cancelamento antes do primeiro pagamento!</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4" th:if="${usuario.getPlano() == 2}">
+					<div class="plano plano_azul plano_selecionado" data-valor="2">
+						<div class="titulo_plano">
+							Plano semestral
+						</div>
+						<div class="desc_plano">
+							R$ 0,07 por requisição<br>
+							<small style="font-size: 60%;">* Passivo de multa ao cancelamento antes do primeiro pagamento!</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4" th:unless="${usuario.getPlano() == 2}">
+					<div class="plano plano_azul" data-valor="2">
+						<div class="titulo_plano">
+							Plano semestral
+						</div>
+						<div class="desc_plano">
+							R$ 0,07 por requisição<br>
+							<small style="font-size: 60%;">* Passivo de multa ao cancelamento antes do primeiro pagamento!</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4" th:if="${usuario.getPlano() == 3}">
+					<div class="plano plano_vermelho plano_selecionado" data-valor="3">
+						<div class="titulo_plano">
+							Plano anual
+						</div>
+						<div class="desc_plano">
+							R$ 0,05 por requisição<br>
+							<small style="font-size: 60%;">* Passivo de multa ao cancelamento antes do primeiro pagamento!</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4" th:unless="${usuario.getPlano() == 3}">
+					<div class="plano plano_vermelho" data-valor="3">
+						<div class="titulo_plano">
+							Plano anual
+						</div>
+						<div class="desc_plano">
+							R$ 0,05 por requisição<br>
+							<small style="font-size: 60%;">* Passivo de multa ao cancelamento antes do primeiro pagamento!</small>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" name="plano" class="plano_valor" th:value="${usuario.getPlano()}" field="*{plano}">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary btn-enviar"
+			style="float: right; margin-top: 10px;; margin-right: 20px;">Salvar</button>
+	</form>
+	<div style="padding: 50px;"></div>
+	
+	<div class="box_tutorial">
+		<span id="msg_tutorial"></span>
+		<buttom class="btn btn-primary" id="proximo" style="float: right;margin-top: -7px;margin-left: 10px;">Próximo
+		</buttom>
+	</div>
+</section>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<link href="/css/landPage.css" rel="stylesheet">
+
+	<script src="/js/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>GenRest</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script>
+		$(function () 
+		{
+			$("h3").mouseenter(function () {
+				$("#circulo_venha").html("Venha Conhecer");
+				$("#circulo_venha").css("border-radius", "20px");
+				$("#resto_venha").hide();
+			});
+
+			$("h3").mouseleave(function () {
+				$("#circulo_venha").html("Ve");
+				$("#circulo_venha").css("border-radius", "50%");
+				$("#resto_venha").show();
+			});
+
+			var height_quadrado = $(".quadrado").height();
+			$(".quadrado_imagem_quem_somos").css("height", height_quadrado);
+		});
+		</script>
+	</head>
+
+	<body class="text-center">
+		<div class="header">
+			<div class="form-row">
+				<div class="form-group col-md-2 logo">
+					<img src="images/padrao.png">
+				</div>
+				<div class="form-group col-md-8 menu">
+					<a href="#quem_somos">Sobre nós</a>
+					<a href="#">Serviços utilizados</a>
+					<a href="#">Bancos suportados</a>
+					<a href="#">Planos</a>
+					<a href="#">Contato</a>
+				</div>
+				<div class="form-group col-md-2 login">
+					<a href="/login"><buttom class="btn btn-primary btn-login" style="width: auto;">Entrar <i class='bx bx-log-in'></i></buttom></a>
+				</div>
+			</div>
+			<div class="form-row first">
+				<div class="form-group col-md-5">
+					<h1>Deseja compartilhar dados com facilidade?</h1>
+					<br>
+					<h4>Deixe isso conosco! Criaremos uma API REST para que isso se torne realidade o mais rápido possível e sem complicações, e o mais importante, que cabe no seu bolso!</h4>
+					<br><br>
+					<a href="/login"><h3><span id="circulo_venha">Ve</span><span id="resto_venha">nha Conhecer</span></h3></a>
+				</div>
+				<div class="form-group col-md-2"></div>
+				<div class="form-group col-md-5">
+					<div class="first_quadrado"></div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row quem_somos" id="quem_somos">
+			<div class="form-group col-md-3"></div>
+			<div class="form-group col-md-6 quadrado">
+				<h0>Quem Somos</h0>
+				<div class="texto_quem_somos">
+					Somos uma empresa de tecnologia nova no mercado mas com espírito jovem e inovador que desenvolve soluções simples para
+					atividades complexas. A necessidade nasceu com a inconformidade de tarefas simples ainda não automatizadas, por isso
+					apostamos em novos talentos, no trabalho em equipe e ideias criativas e inovadoras para ajudar a acelerar a evolução da
+					era digital.
+				</div>
+			</div>
+			<div class="form-group col-md-2 quadrado_imagem_quem_somos">
+				<div class="seta_esquerda"><i class='bx bxs-left-arrow-circle'></i></div>
+				<div class="seta_direita"><i class='bx bxs-right-arrow-circle'></i></div>
+			</div>
+			<div class="form-group col-md-3"></div>
+		</div>
+	</body>
+
+</html>
